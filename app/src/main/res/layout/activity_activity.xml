@@ -11,6 +11,7 @@
         android:textSize="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
         android:id="@+id/textView" />
 
@@ -18,21 +19,34 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="fitXY"
-        android:id="@+id/imageButton"
+        android:id="@+id/wheel"
         android:src="@drawable/wheel"
         android:cropToPadding="false"
         android:focusable="false"
-        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:clickable="true" />
+        android:layout_marginBottom="156dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Air"
         android:id="@+id/checkBox"
-        android:layout_below="@+id/imageButton"
+        android:layout_below="@+id/wheel"
+
         android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="49dp" />
+        android:layout_marginTop="49dp"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/foodtext"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:text="Press the wheel below"
+        android:textSize="35dp" />
 
 </RelativeLayout>
