@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=">w&lt; Yeah"
+        android:text="Random me"
         android:id="@+id/welcometext"
         android:layout_gravity="center_horizontal"
         android:textSize="60dp"
@@ -22,7 +22,17 @@
         android:id="@+id/random"
         android:src="@drawable/zee"
         android:background="@android:color/transparent"
-        android:layout_marginStart="38dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/times"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        android:textColor="#000000" />
 </RelativeLayout>
