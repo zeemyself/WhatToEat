@@ -2,6 +2,7 @@ package com.zeemyself.whattoeat;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -60,25 +61,27 @@ public class activity extends ActionBarActivity {
                 noodle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setContentView(R.layout.random);
-                        random = (ImageButton) findViewById(R.id.random);
-                        times = (TextView) findViewById(R.id.times);
-                        random.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(isConnected) {
-                                    new SendfeedbackJob().execute();
-                                    click++;
-                                    times.setText(String.valueOf(click));
-                                    times.setVisibility(View.VISIBLE);
-                                }
-                                else{
-                                  Toast.makeText(getApplicationContext(), "Please connect Internet", Toast.LENGTH_LONG).show();
-                               }
-//                              job = new SendfeedbackJob();
-                                //random.setClickable(false);
-                            }
-                        });
+                        Intent intent = new Intent(getApplicationContext(),login.class);
+                        startActivity(intent);
+//                        setContentView(R.layout.random);
+//                        random = (ImageButton) findViewById(R.id.random);
+//                        times = (TextView) findViewById(R.id.times);
+//                        random.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                if(isConnected) {
+//                                    new SendfeedbackJob().execute();
+//                                    click++;
+//                                    times.setText(String.valueOf(click));
+//                                    times.setVisibility(View.VISIBLE);
+//                                }
+//                                else{
+//                                  Toast.makeText(getApplicationContext(), "Please connect Internet", Toast.LENGTH_LONG).show();
+//                               }
+////                              job = new SendfeedbackJob();
+//                                //random.setClickable(false);
+//                            }
+//                        });
                     }
                 });
 
@@ -87,14 +90,14 @@ public class activity extends ActionBarActivity {
                     public void onClick(View v) {
                         Toast.makeText(getApplicationContext(), "445", Toast.LENGTH_LONG).show();
                         setContentView(R.layout.random);
-                        random = (ImageButton) findViewById(R.id.random);
-                        text = (TextView) findViewById(R.id.welcometext);
-                        random.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                text.setText(food[randInt(0,food.length-1)]);
-                            }
-                        });
+//                        random = (ImageButton) findViewById(R.id.random);
+//                        text = (TextView) findViewById(R.id.welcometext);
+//                        random.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                text.setText(food[randInt(0,food.length-1)]);
+//                            }
+//                        });
                     }
                 });
 
