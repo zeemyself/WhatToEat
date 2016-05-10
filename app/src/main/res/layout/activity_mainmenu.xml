@@ -21,7 +21,7 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="212dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/randomPicture"
         android:src="@drawable/random"
         android:layout_gravity="center_vertical"
         android:scaleType="fitCenter"
