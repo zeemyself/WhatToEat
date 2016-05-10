@@ -1,5 +1,6 @@
 package com.zeemyself.whattoeat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Yeahh", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(),mainmenu.class));
             }
         });
 

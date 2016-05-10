@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".login" />
-        <activity android:name=".mainmenu"></activity>
+        <activity android:name=".mainmenu" />
+        <activity android:name=".resultactivity"></activity>
     </application>
 
 </manifest>

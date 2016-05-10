@@ -3,4 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="food_location">Choose Location</string>
+    <string-array name="location">
+        <item>Choose Location</item>
+        <item>IUP</item>
+        <item>New Bar</item>
+        <item>Science Bar</item>
+    </string-array>
 </resources>
