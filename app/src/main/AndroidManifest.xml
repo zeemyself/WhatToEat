@@ -27,6 +27,16 @@
         <activity android:name=".login" />
         <activity android:name=".mainmenu" />
         <activity android:name=".resultactivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCrL8s5F_NicqVkzgy4sUi-0ex4nXu_NRY" />
+
+
+
     </application>
 
 </manifest>

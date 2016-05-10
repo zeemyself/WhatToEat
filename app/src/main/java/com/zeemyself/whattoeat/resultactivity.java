@@ -1,5 +1,6 @@
 package com.zeemyself.whattoeat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +24,7 @@ import java.net.URL;
 public class resultactivity extends AppCompatActivity {
 
     ImageView imageResult;
-//    GoogleMap map;
+    GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,38 +36,36 @@ public class resultactivity extends AppCompatActivity {
 
         getPicture d = new getPicture();
         d.execute();
-//        try {
-////            ImageView i = (ImageView)findViewById(R.id.image);
-//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL("http://i.imgur.com/eTuCPxM.jpg").getContent());
-//            imageResult.setImageBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
 
 
 
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+        }
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=13.8464482,100.5675277");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                // Attempt to start an activity that can handle the Intent
+                startActivity(mapIntent);
+            }
+        });
 
 
 
-
-
-
-
-
-
-
-//        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-//
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-//                PackageManager.PERMISSION_GRANTED &&
-//                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-//                        PackageManager.PERMISSION_GRANTED) {
-//            map.setMyLocationEnabled(true);
-////            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-//        }
 
     }
 

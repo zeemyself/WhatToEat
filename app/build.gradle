@@ -31,5 +31,5 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.firebase:firebase-client-android:2.5.2+'
-
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 }
