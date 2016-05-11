@@ -6,10 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -20,11 +23,14 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.jar.Manifest;
 
 public class resultactivity extends AppCompatActivity {
 
     ImageView imageResult;
     GoogleMap map;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,14 @@ public class resultactivity extends AppCompatActivity {
                         PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
         }
+        else{
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},55567);
+        }
 
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=13.8464482,100.5675277");
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=บาร์วิศวะ (IUP)");
 
                 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
