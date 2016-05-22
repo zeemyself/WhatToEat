@@ -59,6 +59,29 @@
             android:layout_height="222dp"
             android:name="com.google.android.gms.maps.MapFragment"
             android:id="@+id/map" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="241dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/price" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/shop"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="50dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
