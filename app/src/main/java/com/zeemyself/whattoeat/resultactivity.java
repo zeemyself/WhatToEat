@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -62,11 +63,19 @@ public class resultactivity extends AppCompatActivity {
 //        imageResult.setImageResource(getResources().getIdentifier(random,"drawable", getPackageName()));
 //        imageResult.setImageResource(draw[Integer.parseInt(random)]);
         imageResult.setBackgroundResource(draw[Integer.parseInt(random)]);
+        imageResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                random = new Random().nextInt(7)+ "";
+                imageResult.setBackgroundResource(draw[Integer.parseInt(random)]);
+                connectDB(random);
+            }
+        });
         foodname = (TextView) findViewById(R.id.foodname);
         price = (TextView) findViewById(R.id.price);
         name = (TextView) findViewById(R.id.name);
         place = getIntent().getStringExtra("Place");
-        connectDB();
+        connectDB(random);
         getIndex();
 //        image = getImageUrl();
 //        Log.d("image",image);
@@ -87,11 +96,24 @@ public class resultactivity extends AppCompatActivity {
         else{
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},55567);
         }
-        map.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(13.846461, 100.569726)));
-        map.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(13.846461, 100.569726),15));
+//                map.animateCamera(CameraUpdateFactory.zoomTo(2));
+            }
+        });
+
         map.addMarker(new MarkerOptions()
                             .position(new LatLng(13.846461, 100.569726))
                             .title("IUP"));
+        map.addMarker((new MarkerOptions()
+                .position(new LatLng(13.848843, 100.567239))
+                .title("บาร์ใหม่")));
+        map.addMarker((new MarkerOptions()
+                .position(new LatLng(13.845841, 100.570727))
+                .title("บาร์วิทยา")));
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -106,6 +128,21 @@ public class resultactivity extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         });
+
+        bar = (RatingBar) findViewById(R.id.ratingBar);
+        bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Firebase.setAndroidContext(getApplicationContext());
+                Firebase myFirebaseRef = new Firebase("https://whattoeat-zee.firebaseio.com/");
+                myFirebaseRef.child("IUP").child(random).child("rating").setValue(rating+"");
+            }
+        });
+
+
+
+
+
     }
     public void getIndex(){
         if(place.equals("IUP"))
@@ -143,7 +180,7 @@ public class resultactivity extends AppCompatActivity {
         }
     }
 
-    public void connectDB(){
+    public void connectDB(String random){
         rand = new Random();
 
 //        Log.d("BUG",place+","+random);

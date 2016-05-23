@@ -44,7 +44,7 @@ public class mainmenu extends AppCompatActivity {
 //                .build();
         randomPicture = (ImageButton) findViewById(R.id.randomPicture);
         GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(randomPicture);
-        Glide.with(this).load(R.drawable.spinrandom2).into(imageViewTarget);
+        Glide.with(this).load(R.drawable.spin2).into(imageViewTarget);
 
         randomPicture.setOnClickListener(new View.OnClickListener() {
             @Override
