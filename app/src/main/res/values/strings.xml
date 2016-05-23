@@ -8,8 +8,8 @@
     <string-array name="location">
         <item>Choose Location</item>
         <item>IUP</item>
-        <item>New Bar</item>
-        <item>Science Bar</item>
+        <item>บาร์ใหม่</item>
+        <item>บาร์วิทยา</item>
     </string-array>
     <string name="facebook_app_id">1742204169399312</string>
 

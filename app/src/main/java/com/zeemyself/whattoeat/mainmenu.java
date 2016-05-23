@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 public class mainmenu extends AppCompatActivity {
+    private TextView welcome;
     ImageButton randomPicture;
     Spinner spinner;
     String place = "";
@@ -24,6 +26,13 @@ public class mainmenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
+
+        welcome = (TextView) findViewById(R.id.welcome);
+        String name = getIntent().getStringExtra("name");
+        if(name == null)
+            name = "Swas";
+        welcome.setText("Welcome " + name);
+
 
         spinner = (Spinner) findViewById(R.id.spinner);
 

@@ -88,8 +88,10 @@ public class activity extends ActionBarActivity {
                 rice.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "445", Toast.LENGTH_LONG).show();
-                        setContentView(R.layout.random);
+//                        Toast.makeText(getApplicationContext(), "445", Toast.LENGTH_LONG).show();
+//                        setContentView(R.layout.random);
+                        Intent intent = new Intent(getApplicationContext(),login.class);
+                        startActivity(intent);
 //                        random = (ImageButton) findViewById(R.id.random);
 //                        text = (TextView) findViewById(R.id.welcometext);
 //                        random.setOnClickListener(new View.OnClickListener() {

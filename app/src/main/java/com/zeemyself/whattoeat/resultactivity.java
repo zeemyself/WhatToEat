@@ -23,9 +23,12 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
@@ -84,7 +87,11 @@ public class resultactivity extends AppCompatActivity {
         else{
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},55567);
         }
-
+        map.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(13.846461, 100.569726)));
+        map.animateCamera(CameraUpdateFactory.zoomTo(17));
+        map.addMarker(new MarkerOptions()
+                            .position(new LatLng(13.846461, 100.569726))
+                            .title("IUP"));
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -142,7 +149,7 @@ public class resultactivity extends AppCompatActivity {
 //        Log.d("BUG",place+","+random);
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://whattoeat-zee.firebaseio.com/");
-        myFirebaseRef.child(place).child(random).addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("IUP").child(random).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println(dataSnapshot.getValue());
@@ -150,7 +157,7 @@ public class resultactivity extends AppCompatActivity {
                 foodname = (TextView) findViewById(R.id.foodname);
                 price = (TextView) findViewById(R.id.price);
                 name.setText(dataSnapshot.child("name").getValue() + "");
-                price.setText("ราคา : "+dataSnapshot.child("price").getValue() + "");
+                price.setText("ราคา : "+dataSnapshot.child("price").getValue() + " บาท");
 //                Toast.makeText(getApplicationContext(),dataSnapshot.getValue()+"",Toast.LENGTH_LONG).show();
 //                AlertDialog.Builder test = new AlertDialog.Builder(resultactivity.this);
 //                        test.setTitle("Fire Base");
@@ -176,7 +183,7 @@ public class resultactivity extends AppCompatActivity {
         myFirebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               imageurl[0] = dataSnapshot.child(place).child(random).child("image").getValue()+"";
+               imageurl[0] = dataSnapshot.child("IUP").child(random).child("image").getValue()+"";
 //                Toast.makeText(getApplicationContext(),imageurl[0],Toast.LENGTH_LONG).show();
             }
 
