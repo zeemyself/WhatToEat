@@ -3,6 +3,7 @@ package com.zeemyself.whattoeat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 public class mainmenu extends AppCompatActivity {
     ImageButton randomPicture;
@@ -23,8 +27,16 @@ public class mainmenu extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner);
 
-
+//        Uri uri = Uri.parse("android.resource://com.zeemyself.whattoeat/drawable/spinrandom2");
+//        InputStream stream = getContentResolver().openInputStream(uri);
+//        DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                .setUri(uri)
+//                .setAutoPlayAnimations(true)
+//                .build();
         randomPicture = (ImageButton) findViewById(R.id.randomPicture);
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(randomPicture);
+        Glide.with(this).load(R.drawable.spinrandom2).into(imageViewTarget);
+
         randomPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,31 +40,38 @@ import java.util.jar.Manifest;
 public class resultactivity extends AppCompatActivity {
 
     Random rand;
+    RatingBar bar;
     ImageView imageResult;
     GoogleMap map;
-    TextView foodname,price;
+    TextView foodname,price,name;
     String place;
     String location[] = {"google.navigation:q=บาร์วิศวะ (IUP)","google.navigation:q=บาร์วิทยาศาสตร์","google.navigation:q=โรงอาหารกลาง 1"};
     int index;
-    String random = new Random().nextInt(7) + "";
-    String image;
+    int draw[] = {R.drawable.a,R.drawable.b,R.drawable.c,R.drawable.d,R.drawable.e,R.drawable.f,R.drawable.g,R.drawable.h};
+    String random = new Random().nextInt(7)+ "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultactivity);
 
         imageResult = (ImageView) findViewById(R.id.imageResult);
-
+//        int temp = Integer.parseInt(random);
+//        imageResult.setImageResource(getResources().getIdentifier(random,"drawable", getPackageName()));
+//        imageResult.setImageResource(draw[Integer.parseInt(random)]);
+        imageResult.setBackgroundResource(draw[Integer.parseInt(random)]);
         foodname = (TextView) findViewById(R.id.foodname);
         price = (TextView) findViewById(R.id.price);
-
+        name = (TextView) findViewById(R.id.name);
         place = getIntent().getStringExtra("Place");
         connectDB();
         getIndex();
-        image = getImageUrl();
-        Toast.makeText(getApplicationContext(),place,Toast.LENGTH_LONG).show();
-        getPicture d = new getPicture();
-        d.execute();
+//        image = getImageUrl();
+//        Log.d("image",image);
+//        Toast.makeText(getApplicationContext(),place,Toast.LENGTH_LONG).show();
+//        getPicture d = new getPicture(image);
+//        d.execute();
+//        new getPicture((ImageView) findViewById(R.id.imageResult))
+//                .execute(image);
 //        GoogleMap
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
@@ -100,16 +109,17 @@ public class resultactivity extends AppCompatActivity {
             index = 2;
     }
     private class getPicture extends AsyncTask<Bitmap,Integer, Bitmap>{
-
 //        String image = getImageUrl();
+        String url = "";
+        public getPicture(String url){
+            this.url = url;
+        }
         @Override
         protected Bitmap doInBackground(Bitmap... params) {
             Bitmap bitmap = null;
             try {
-//            ImageView i = (ImageView)findViewById(R.id.image);
-
-                bitmap = BitmapFactory.decodeStream((InputStream)new URL(image).getContent());
-
+                bitmap = BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
+                Log.d("IMAGEZAAAA",url);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -128,25 +138,29 @@ public class resultactivity extends AppCompatActivity {
 
     public void connectDB(){
         rand = new Random();
-        final String random = rand.nextInt(6) + "";
-        Log.d("BUG",place+","+random);
+
+//        Log.d("BUG",place+","+random);
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://whattoeat-zee.firebaseio.com/");
         myFirebaseRef.child(place).child(random).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println(dataSnapshot.getValue());
-
+                bar = (RatingBar) findViewById(R.id.ratingBar);
                 foodname = (TextView) findViewById(R.id.foodname);
                 price = (TextView) findViewById(R.id.price);
-                foodname.setText(dataSnapshot.child("name").getValue() + "");
-                price.setText(dataSnapshot.child("price").getValue() + "");
+                name.setText(dataSnapshot.child("name").getValue() + "");
+                price.setText("ราคา : "+dataSnapshot.child("price").getValue() + "");
 //                Toast.makeText(getApplicationContext(),dataSnapshot.getValue()+"",Toast.LENGTH_LONG).show();
 //                AlertDialog.Builder test = new AlertDialog.Builder(resultactivity.this);
 //                        test.setTitle("Fire Base");
 //                        test.setMessage(dataSnapshot.getValue()+"\n"+
 //                                    dataSnapshot.child("name").getValue()+"\n"+
 //                                    dataSnapshot.child("price").getValue()).create().show();
+
+                String rate = dataSnapshot.child("rating").getValue()+"";
+                bar.setRating(Float.parseFloat(rate));
+
             }
 
             @Override
@@ -163,7 +177,7 @@ public class resultactivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                imageurl[0] = dataSnapshot.child(place).child(random).child("image").getValue()+"";
-                Toast.makeText(getApplicationContext(),imageurl[0],Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),imageurl[0],Toast.LENGTH_LONG).show();
             }
 
             @Override
